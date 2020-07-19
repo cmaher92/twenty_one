@@ -32,12 +32,12 @@ module TwentyOne
       @busted = true if @value > 21
     end
 
-    def >(other_hand)
-      @value > other_hand.value
+    def >(other)
+      @value > other.value
     end
 
-    def ==(other_hand)
-      @value == other_hand.value
+    def ==(other)
+      @value == other.value
     end
 
     def to_s
@@ -58,7 +58,7 @@ module TwentyOne
 
     def displayable_value
       value = @hand.reject(&:hidden?).map(&:value).sum
-      [' ', ' ', ' ', "TOTAL:".center(8), value.to_s.center(8), ' ', ' ']
+      [' ', ' ', ' ', 'TOTAL:'.center(8), value.to_s.center(8), ' ', ' ']
     end
 
     def hand_details
@@ -67,22 +67,24 @@ module TwentyOne
       # [] [] HIT [] TOTAL
       cards_hits_and_total = retrieve_cards_hits_and_total
 
-      hand_details = []
-      7.times do |row_idx|
-        row = []
-        cards_hits_and_total.each { |card| row << card[row_idx] }
-        hand_details << row.join('')
+      hand_details = Array.new(7) { [] }
+      cards_hits_and_total.each do |card|
+        card.each_with_index do |row, idx|
+          hand_details[idx] << row
+        end
       end
-      hand_details
+
+      hand_details.map(&:join)
     end
 
     def retrieve_cards_hits_and_total
-      # adds text to indicate when participant hits and value of hand
+      # add hand total value
       cards = @hand.map(&:displayable)
       add_hits(cards) << displayable_value
     end
 
     def add_hits(cards)
+      # adds text to indicate when participant hits and value of hand
       cards_and_hits = []
       cards.each_with_index do |card, idx|
         cards_and_hits << HIT if idx > 1
