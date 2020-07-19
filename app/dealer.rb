@@ -2,6 +2,7 @@ require_relative 'participant'
 require_relative 'hand'
 
 module TwentyOne
+  # represents a Dealer
   class Dealer < Participant
     def initialize
       super
@@ -16,14 +17,14 @@ module TwentyOne
     end
 
     def display_hand
-      puts ""
+      puts ''
       puts "Dealer's Hand"
       puts @hand
-      puts ""
+      puts ''
     end
 
     def to_s
-      "Dealer"
+      'Dealer'
     end
   end
 end

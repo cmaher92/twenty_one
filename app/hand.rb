@@ -1,10 +1,9 @@
 require_relative 'card'
-require 'pry'
 
 module TwentyOne
+  # reprents a hand belonging to either Player or Dealer
   class Hand
-    EMPTY = '     '
-    HIT = [EMPTY, EMPTY, EMPTY, 'HIT'.center(5), EMPTY, EMPTY, EMPTY]
+    EMPTY = '     '.freeze
     attr_reader :hand, :value
 
     def initialize
@@ -85,9 +84,10 @@ module TwentyOne
 
     def add_hits(cards)
       # adds text to indicate when participant hits and value of hand
+      hit = [EMPTY, EMPTY, EMPTY, 'HIT'.center(5), EMPTY, EMPTY, EMPTY]
       cards_and_hits = []
       cards.each_with_index do |card, idx|
-        cards_and_hits << HIT if idx > 1
+        cards_and_hits << hit if idx > 1
         cards_and_hits << card
       end
       cards_and_hits

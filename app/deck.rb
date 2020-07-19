@@ -1,6 +1,7 @@
 require_relative 'card'
 
 module TwentyOne
+  # represents a deck of cards
   class Deck
     attr_reader :deck
 
@@ -9,9 +10,7 @@ module TwentyOne
     end
 
     def deal
-      if @deck.empty?
-        @deck = build_deck.shuffle
-      end
+      @deck = build_deck.shuffle if @deck.empty?
       @deck.shift
     end
 

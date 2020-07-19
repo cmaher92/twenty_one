@@ -1,6 +1,7 @@
 module TwentyOne
+  # represents a playing card
   class Card
-    EMPTY_CARD = ['┌', '│', '│', '│', '│', '│', '└']
+    EMPTY_CARD = ['┌', '│', '│', '│', '│', '│', '└'].map(&:freeze)
     attr_accessor :value
 
     def initialize(face, suit)
@@ -24,7 +25,7 @@ module TwentyOne
     end
 
     def hidden?
-      !!@hidden
+      @hidden
     end
 
     def displayable
@@ -34,13 +35,13 @@ module TwentyOne
 
     def card
       [
-        ["┌────────┐"],
+        ['┌────────┐'],
         ["│#{@face.ljust(2)}      │"],
-        ["│        │"],
+        ['│        │'],
         ["│   #{emojify_suit}    │"],
-        ["│        │"],
+        ['│        │'],
         ["│      #{@face.rjust(2)}│"],
-        ["└────────┘"]
+        ['└────────┘']
       ]
     end
 
